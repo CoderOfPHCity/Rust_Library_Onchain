@@ -39,7 +39,7 @@ impl BookStore {
         if caller != self.admin_address {
             return Err(BookStoreError::NotAuthorized);
         }
-        if self.books.iter().any(|book| book.id == book_id) {
+        if self.books.iter().find(|bok| bok.id == book_id).is_some() {
             return Err(BookStoreError::BookIdAlreadyExists);
         }
         let book = Book {
